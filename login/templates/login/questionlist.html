@@ -1,0 +1,100 @@
+{% extends 'base.html' %}
+{% block title %}问题列表{% endblock %}
+{% block content %}
+{% if request.session.is_login %}
+
+
+<body>
+    <div class="col-md-10 col-md-offset-1">
+        <div class="container">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h2>问题列表</h2>
+
+                    <form class='form-search' method="get" action="/questionlist/search/">
+                        {% if message %}
+                        <div class="alert alert-warning">{{ message }}</div>
+                        {% endif %}
+                        {% csrf_token %}
+                        <div class="input-group">
+                            <input type="text" name="mykey" class="form-control" placeholder="请输入关键字" required />
+                            <span class="input-group-btn">
+                                <input type="submit" class="btn btn-default" value="搜索" />
+                            </span>
+                        </div>
+                    </form>
+                    <br>
+                    <a href="/ask/">
+                        <button class="btn btn-primary pull-left">提问</button>
+                    </a>
+                    <br><br>
+                </div>
+                <div class="panel-body">
+                    <table style="word-break: break-all; word-wrap:break-word;" id="problemlist"
+                        class="table table-striped">
+                        <thead>
+                            <tr class="toprow primary">
+                                <th width="20" class="header"></th>
+                                <th width="800" class="header">
+                                    <strong>问题内容</strong>
+                                </th>
+                                <th class="hidden-xs header">
+                                    <strong>提问者</strong>
+                                </th>
+                                <th class="hidden-xs header">
+                                    <strong>更新时间</strong>
+                                </th>
+                                <th class="hidden-xs header">
+                                    <strong>操作</strong>
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {%for query in result%}
+                            <tr class="evenrow">
+                                <td>
+                                    <div class="none"></div>
+                                </td>
+                                <td>
+                                    <div class="left">
+                                        <a href="/question/{{query.id}}/">{{query.content}} </a>
+                                    </div>
+                                </td>
+                                <td class="hidden-xs">
+                                    <div class="center">{{query.creator.name}}</div>
+                                </td>
+                                <td class="hidden-xs">
+                                    <div class="center">{{query.c_time}}</div>
+                                </td>
+                                <td>
+                                    <div class="center">
+                                        {% if query.creator.id == request.session.user_id %}
+                                        <a href="/delquestion/{{query.id}}/">
+                                            <button class="btn btn-danger">删除</button>
+                                        </a>
+                                        {% endif %}
+                                    </div>
+                                </td>
+                            </tr>
+                            {%endfor%}
+                        </tbody>
+                    </table>
+                </div>
+            </div> <!-- /panel -->
+        </div> <!-- /container -->
+    </div>
+</body>
+
+{% else %}
+
+
+<body>
+    <div class="col-md-10 col-md-offset-1">
+        <div class="head">
+            <h1>你尚未登录，请先登录！</h1>
+        </div>
+    </div>
+
+</body>
+{% endif %}
+{% endblock %}

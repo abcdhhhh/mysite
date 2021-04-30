@@ -1,0 +1,46 @@
+{% extends 'base.html' %}
+{% block title %}写回答：{{query.content}}{% endblock %}
+{% block content %}
+{% if request.session.is_login %}
+
+
+<body>
+    <div class="col-md-10 col-md-offset-1">
+        <div class="panel-heading">
+            <h2>{{query.content}}</h2><br>
+            {{query.description}}<br>
+            提问者：{{query.creator.name}}<br>
+            编辑于{{query.c_time}}
+        </div>
+        <hr>
+        <div class="container">
+            <form class='form-answer' action="/question/{{query.id}}/answer/" method="post">
+                {% if message %}
+                <div class="alert alert-warning">{{ message }}</div>
+                {% endif %}
+
+                {% csrf_token %}
+                <div class="form-group">
+                    {{ answer_form.content.label_tag }}
+                    {{ answer_form.content }}
+                </div>
+                <button type="reset" class="btn btn-warning pull-left">重置</button>
+                <button type="submit" class="btn btn-primary pull-right">提交</button>
+            </form>
+        </div>
+    </div>
+</body>
+
+{% else %}
+
+
+<body>
+    <div class="col-md-10 col-md-offset-1">
+        <div class="head">
+            <h1>你尚未登录，请先登录！</h1>
+        </div>
+    </div>
+
+</body>
+{% endif %}
+{% endblock %}

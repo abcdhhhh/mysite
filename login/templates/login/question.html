@@ -1,0 +1,88 @@
+{% extends 'base.html' %}
+{% block title %}{{query.content}}{% endblock %}
+{% block content %}
+{% if request.session.is_login %}
+
+
+<body>
+    <div class="col-md-10 col-md-offset-1">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h2>{{query.content}}</h2><br>
+                <p>{{query.description}}</p>
+                <br>
+                <a href="/question/{{query.id}}/answer/">
+                    <button class="btn btn-primary pull-right">写回答</button>
+                </a>
+                提问者：{{query.creator.name}}<br>
+                编辑于{{query.c_time}}
+            </div>
+            <hr>
+
+            <div class="panel-body">
+                <table></table>
+                <table style="word-break: break-all; word-wrap:break-word;" id="problemlist"
+                    class="table table-striped">
+                    <thead>
+                        <tr class="toprow primary">
+                            <th width="20" class="header"></th>
+                            <th width="800" class="header">
+                                <strong>回答内容</strong>
+                            </th>
+                            <th class="hidden-xs header">
+                                <strong>答主</strong>
+                            </th>
+                            <th class="hidden-xs header">
+                                <strong>编辑时间</strong>
+                            </th>
+                            <th class="hidden-xs header">
+                                <strong>操作</strong>
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {%for answer in answerlist%}
+                        <tr class="evenrow">
+                            <td>
+                                <div class="none"></div>
+                            </td>
+                            <td>
+                                <div class="left"> {{answer.content}} </div>
+                            </td>
+                            <td class="hidden-xs">
+                                <div class="center">{{answer.author.name}}</div>
+                            </td>
+                            <td class="hidden-xs">
+                                <div class="center">{{answer.c_time}}</div>
+                            </td>
+                            <td>
+                                <div class="center">
+                                    {% if answer.author.id == request.session.user_id %}
+                                    <a href="/question/{{query.id}}/delanswer/{{answer.id}}/">
+                                        <button class="btn btn-danger">删除</button>
+                                    </a>
+                                    {% endif %}
+                                </div>
+                            </td>
+                        </tr>
+                        {%endfor%}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</body>
+
+{% else %}
+
+
+<body>
+    <div class="col-md-10 col-md-offset-1">
+        <div class="head">
+            <h1>你尚未登录，请先登录！</h1>
+        </div>
+    </div>
+
+</body>
+{% endif %}
+{% endblock %}

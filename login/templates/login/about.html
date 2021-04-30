@@ -1,0 +1,61 @@
+{% extends 'base.html' %}
+{% block title %}关于本站{% endblock %}
+{% block content %}
+{% load static %}
+<div class="col-md-10 col-md-offset-1">
+    <h1 id='关于本站'><span>关于本站</span></h1>
+    <p><span>本平台是一个简易问答平台。</span></p>
+    <p><span>用户在注册并登录以后，可以发布问题或对已有问题进行回答。</span></p>
+    <h2 id='环境配置'><span>环境配置</span></h2>
+    <p><span>平台采用Django框架进行搭建。在本机运行时，其他主机可通过局域网访问该平台。</span></p>
+    <p><span>本机相关环境如下：</span></p>
+    <ul>
+        <li><span>Windows 10</span></li>
+        <li><span>python 3.8.8</span></li>
+        <li><span>Django 3.2</span></li>
+        <li><span>PyMySQL 1.0.2</span></li>
+        <li><span>MySQL 8.0.23 for Win64 on x86_64</span></li>
+    </ul>
+    <p><span>运行方式为：进入mysite目录，运行命令</span><code>python manage.py runserver</code></p>
+    <h2 id='功能简述'><span>功能简述</span></h2>
+    <h3 id='注册'><span>注册</span></h3>
+    <p><span>用户输入昵称、邮箱、密码、确认密码、验证码后即可完成注册；</span></p>
+    <h3 id='登录'><span>登录</span></h3>
+    <p><span>用户输入昵称、密码、验证码后即可登录；</span></p>
+    <h3 id='找回密码'><span>找回密码</span></h3>
+    <p><span>如果忘记了密码，只需要提供正确的邮箱地址即可更换新的密码。</span></p>
+    <h3 id='提问'><span>提问</span></h3>
+    <p><span>用户在登录后可以发布问题或删除自己提出的问题，并且可以看到其他用户发布的问题。</span></p>
+    <h3 id='回答'><span>回答</span></h3>
+    <p><span>在每个问题下，用户可以创建回答和删除自己写过的回答。每个用户在一个问题下可以创建多个回答。</span></p>
+    <h3 id='积分排行'><span>积分排行</span></h3>
+    <p><span>用户每提出一个问题记1分，每回答一个问题记3分。所有用户分数从高到低显示在排行榜上。</span></p>
+    <h3 id='查看简介'><span>查看简介</span></h3>
+    <p><span>在导航栏点击“关于本站”即可（未登录也可查看）。</span></p>
+    <h3 id='摸鱼不是）'><span>摸鱼（不是）</span></h3>
+    <p><span>在你没有登录的情况下，可以在主页玩“生命游戏”。</span></p>
+    <h2 id='数据库设计'><span>数据库设计</span></h2>
+    <p><span>数据库共有3张表——用户、问题和回答。</span></p>
+    <p><span>其ER图如下所示：（标下划线的为主键）</span></p>
+    <p><img src={% static 'image/ER.png' %} style="zoom:67%;" />
+    </p>
+    <p><span>每个表的具体列名及相关信息如下：</span></p>
+    <p><img src={% static 'image/columns.png' %} style="zoom:80%;" />
+    </p>
+    <h2 id='技术难点'><span>技术难点</span></h2>
+    <ul>
+        <li><span>html+css+js的语法</span></li>
+        <li><span>html与python的交互</span></li>
+        <li><span>Django的ORM操作</span></li>
+    </ul>
+    <h2 id='参考资料'><span>参考资料</span></h2>
+    <p><a href='https://www.django.cn/article/show-15.html' target='_blank'
+            class='url'>https://www.django.cn/article/show-15.html</a></p>
+    <p><a href='https://blog.csdn.net/laikaikai/article/details/80563387' target='_blank'
+            class='url'>https://blog.csdn.net/laikaikai/article/details/80563387</a></p>
+    <p><a href='https://docs.djangoproject.com/en/3.2/' target='_blank'
+            class='url'>https://docs.djangoproject.com/en/3.2/</a></p>
+    <p>&nbsp;</p>
+</div>
+
+{% endblock %}
