@@ -18,6 +18,5 @@ urlpatterns = [
     path('login/', views.login),
     path('register/', views.register),
     path('findback/', views.findback),
-    path('logout/', views.logout),
-    path('captcha', include('captcha.urls'))  # 增加这一行
+    path('logout/', views.logout)
 ]

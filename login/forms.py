@@ -1,5 +1,4 @@
 from django import forms
-from captcha.fields import CaptchaField
 
 
 class UserForm(forms.Form):
@@ -11,7 +10,6 @@ class UserForm(forms.Form):
         label="密码",
         max_length=256,
         widget=forms.PasswordInput(attrs={'class': 'form-control'}))
-    captcha = CaptchaField(label='验证码')
 
 
 class RegisterForm(forms.Form):
@@ -38,7 +36,6 @@ class RegisterForm(forms.Form):
         label="邮箱地址（用于找回密码）",
         widget=forms.EmailInput(attrs={'class': 'form-control'}))
     sex = forms.ChoiceField(label='性别', choices=gender)
-    captcha = CaptchaField(label='验证码')
 
 
 class FindbackForm(forms.Form):

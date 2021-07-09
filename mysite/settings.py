@@ -36,7 +36,6 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'login',
-    'captcha',
 ]
 
 MIDDLEWARE = [
@@ -75,13 +74,40 @@ WSGI_APPLICATION = 'mysite.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'users',  #数据库名字
-        'USER': 'root',  #账号
-        'PASSWORD': '123456',  #密码
-        'HOST': '127.0.0.1',  #IP
-        'PORT': '3306',  #端口
+        'NAME': 'users',  # 数据库名字
+        'USER': 'root',  # 账号
+        'PASSWORD': '123456',  # 密码
+        'HOST': '127.0.0.1',  # IP
+        'PORT': '3306',  # 端口
+        'OPTIONS': {
+            'init_command': "SET sql_mode='STRICT_TRANS_TABLES'",
+        },
+    },
+    'read_db': {
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'users',  # 数据库名字
+        'USER': 'root',  # 账号
+        'PASSWORD': 'kBRALa+R!',  # 密码
+        'HOST': '120.46.134.175',  # IP
+        'PORT': '3334',  # 端口
+        'OPTIONS': {
+            'init_command': "SET sql_mode='STRICT_TRANS_TABLES'",
+        },
+    },
+    'write_db': {
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'users',  # 数据库名字
+        'USER': 'root',  # 账号
+        'PASSWORD': 'kBRALa+R!',  # 密码
+        'HOST': '120.46.134.175',  # IP
+        'PORT': '3333',  # 端口
+        'OPTIONS': {
+            'init_command': "SET sql_mode='STRICT_TRANS_TABLES'",
+        },
     }
 }
+
+DATABASE_ROUTERS = ['router.router']
 
 # Password validation
 # https://docs.djangoproject.com/en/2.1/ref/settings/#auth-password-validators
@@ -125,3 +151,5 @@ STATIC_URL = '/static/'
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, "static"),
 ]
+
+DEFAULT_AUTO_FIELD = 'django.db.models.AutoField'
